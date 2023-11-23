@@ -1,10 +1,9 @@
 const hre = require('hardhat');
 const { keccak256, toUtf8Bytes } = hre.ethers;
-const addr = '0x5fbdb2315678afecb367f032d93f642f64180aa3';
+const addr = '0xe7f1725e7734ce288f8367e1bb143e90bb3f0512';
 async function lookup() {
-    const slot = keccak256(toUtf8Bytes('jarvis'));
-    const value = await hre.ethers.provider.getStorage(addr, slot);
+    const storage = await hre.ethers.getContractAt('Storage', addr);
 
-    console.log(parseInt(value));
+    await storage.check();
 }
 lookup();
